@@ -1,0 +1,13 @@
+{
+  "name": "react-generator",
+  "version": "1.0.0",
+  "license": "MIT",
+  "bin": {
+    "react-generator": "bin/react-generator"
+  },
+  "scripts": {},
+  "devDependencies": {},
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}
