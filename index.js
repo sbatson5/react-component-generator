@@ -25,7 +25,7 @@ module.exports = () => {
 
   switch (command.name) {
     case 'generate':
-      require('./generate/file')(file, fileName, params);
+      require('./commands/generate')(file, fileName, params);
       break;
     case 'delete':
       console.log('we will delete stuff');

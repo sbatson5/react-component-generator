@@ -8,6 +8,7 @@
   "scripts": {},
   "devDependencies": {},
   "dependencies": {
+    "fs-extra": "^7.0.1",
     "minimist": "^1.2.0"
   }
 }
