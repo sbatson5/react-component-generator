@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const DEFAULT_FOLDER = './src';
 const insertIntoFile = require('../insert-into-file');
-const EOL = require('os').EOL;
 
 module.exports = (fileType, fileName) => {
   if (!fileName) return;

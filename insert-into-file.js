@@ -13,34 +13,29 @@ module.exports = (fullPath, contentsToInsert, options = {}, overWrittenContent) 
 
     let alreadyPresent = originalContents.indexOf(contentsToInsert) > -1;
     let insert = !alreadyPresent;
-    let insertBehavior = 'end';
-
-    if (options.before) { insertBehavior = 'before'; }
-    if (options.after) { insertBehavior = 'after'; }
+    let insertBehavior = options.before ? 'before' : 'after';
 
     if (options.force) { insert = true; }
 
     if (insert) {
-      if (insertBehavior === 'end') {
-        contentsToWrite += contentsToInsert;
-      } else {
-        let contentMarker = options[insertBehavior];
-        if (contentMarker instanceof RegExp) {
-          let matches = contentsToWrite.match(contentMarker);
-          if (matches) {
-            contentMarker = matches[0];
-          }
+      let contentMarker = options[insertBehavior];
+      if (contentMarker instanceof RegExp) {
+        let matches = contentsToWrite.match(contentMarker);
+        if (matches) {
+          contentMarker = matches[0];
         }
-        let contentMarkerIndex = contentsToWrite.indexOf(contentMarker);
+      }
+      let contentMarkerIndex = contentsToWrite.indexOf(contentMarker);
 
-        if (contentMarkerIndex !== -1) {
-          let insertIndex = contentMarkerIndex;
-          if (insertBehavior === 'after') { insertIndex += contentMarker.length; }
+      if (contentMarkerIndex !== -1) {
+        let insertIndex = contentMarkerIndex;
+        if (insertBehavior === 'after') { insertIndex += contentMarker.length; }
 
-          contentsToWrite = contentsToWrite.slice(0, insertIndex) +
-            contentsToInsert + EOL +
-            contentsToWrite.slice(insertIndex);
-        }
+        let addEOL = insertBehavior === 'before' ? EOL : '';
+
+        contentsToWrite = contentsToWrite.slice(0, insertIndex) +
+          contentsToInsert + addEOL +
+          contentsToWrite.slice(insertIndex);
       }
     }
 
