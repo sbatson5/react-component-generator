@@ -35,7 +35,9 @@ function _deleteFile(dir, fileName) {
   let fullPath = `${DEFAULT_FOLDER}/${dir}/${fileName}.js`;
 
   fs.unlink(fullPath, (err) => {
-    if (err) throw err;
+    if (err) {
+      return console.log(`Could not find ${fileName}`);
+    };
     console.log(`${fileName} was deleted`);
   });
 }
