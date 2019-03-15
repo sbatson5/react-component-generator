@@ -32,8 +32,8 @@ function createRoute(fileName) {
 async function _addToRouter(fileName) {
   let [start, end] = fileName.split('-');
   let routeName = `${upcase(start)}${upcase(end)}`;
-  let importStatement = `\nimport ${routeName} from './routes/${fileName}';`;
-  let routeStatement = `\n\t\t\t\t\t<Route path="/${fileName}" exact component={${routeName}} />`
+  let importStatement = `import ${routeName} from './routes/${fileName}';`;
+  let routeStatement = `<Route path="/${fileName}" exact component={${routeName}} />`
 
   let updatedFile = await insertIntoFile(`${DEFAULT_FOLDER}/App.js`, importStatement, {
     after: /(import.+?;)/

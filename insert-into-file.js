@@ -19,6 +19,7 @@ module.exports = (fullPath, contentsToInsert, options = {}, overWrittenContent) 
 
     if (insert) {
       let contentMarker = options[insertBehavior];
+      let leadingIndentation = '';
       if (contentMarker instanceof RegExp) {
         let matches = contentsToWrite.match(contentMarker);
         if (matches) {
@@ -26,10 +27,21 @@ module.exports = (fullPath, contentsToInsert, options = {}, overWrittenContent) 
         }
       }
       let contentMarkerIndex = contentsToWrite.indexOf(contentMarker);
+      if (insertBehavior === 'after') {
+        let fileUpToThisPoint = contentsToWrite.slice(0, contentMarkerIndex);
+        let asArray = fileUpToThisPoint.split('\n').reverse();
+        let previousLineIndentation = asArray[0];
+        if (previousLineIndentation && previousLineIndentation.length) {
+          leadingIndentation = previousLineIndentation + '  ';
+        }
+      }
 
       if (contentMarkerIndex !== -1) {
         let insertIndex = contentMarkerIndex;
-        if (insertBehavior === 'after') { insertIndex += contentMarker.length; }
+        if (insertBehavior === 'after') {
+          contentsToInsert = '\n' + leadingIndentation + contentsToInsert;
+          insertIndex += contentMarker.length;
+        }
 
         let addEOL = insertBehavior === 'before' ? EOL : '';
 
