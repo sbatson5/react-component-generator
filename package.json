@@ -1,11 +1,11 @@
 {
-  "name": "react-component-generator",
+  "name": "rcg-cli",
   "version": "0.0.1",
   "license": "MIT",
   "description": "A CLI tool to quickly generate React components",
   "repository": "https://github.com/sbatson5/react-component-generator",
   "bin": {
-    "rcg": "bin/react-component-generator"
+    "rcg": "bin/rcg-cli"
   },
   "author": "Scott Batson",
   "keywords": [
