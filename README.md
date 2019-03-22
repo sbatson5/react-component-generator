@@ -3,9 +3,9 @@
 ## Helping to enforce convention within a react project
 
 In an effort to help remove a lot of boilerplate/duplication, this CLI allows
-you generate components from the command line.
+you to generate components from the command line.
 It takes care of placing components in the correct directory, adding routes to
-the appropriate directory and update our router file.
+the appropriate directory and updates our router.
 
 To get started.
 
@@ -34,7 +34,7 @@ export default function myComponent({}) {
 ```
 
 This works with nested directories.
-You can also use shorthand commands such `gen`, `new` or `g` for the generate command.
+You can also use aliased commands such `gen`, `new` or `g` for the generate command.
 
 ```bash
 rcg g component navigation/sidebar/menu-items
@@ -44,8 +44,7 @@ rcg g component navigation/sidebar/menu-items
 
 ## Routes
 
-Routes follow a similar pattern but will put the components into a `routes`
-directory.
+Routes follow a similar pattern but will be put into a `routes` directory.
 This is a somewhat opinionated approach, but the idea is that components used
 to serve routes should be separate than traditional components.
 
@@ -80,9 +79,9 @@ export default App;
 
 ## Specifying class components
 
-By default, `react-component-generator` adds function components as that seems
+By default, `react-component-generator` adds function components, as that seems
 to be the recommended pattern going forward.
-However it can generate class components by using the `--class` flag.
+However, it can generate class components by using the `--class` flag.
 
 ```bash
 rcg g component my-component --class
