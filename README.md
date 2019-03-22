@@ -12,7 +12,6 @@ To get started.
 ```bash
 npm install -g react-component-generator
 ```
-(this isn't published yet)
 
 To add a component, simply use the generate command:
 
@@ -121,7 +120,7 @@ In your project, create a `.react-component-generator` file.
 This is a text file that follows a JSON format and is read at runtime to find
 project-specific defaults.
 
-Currently the settings you specify:
+Currently the settings you can specify:
 
 `componentType` - this can be `class` or `function`
   * `class` will generate class-based components by default (without
