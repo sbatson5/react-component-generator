@@ -128,11 +128,15 @@ Currently the settings you specify:
     requiring the `--class flag`)
   * `function` is the default and does not need to be specified
 
+`componentsDirectory` - indicates the directory components will be created
+`routesDirectory` - indicates the directory routes will be created
+
 ```json
 {
-  "componentType": "class"
+  "componentType": "class",
+  "componentsDirectory": "partials",
+  "routesDirectory": "pages"
 }
-
 ```
 
 ## Coming soon:

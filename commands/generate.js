@@ -18,22 +18,23 @@ module.exports = (fileType, fileName, params, settings) => {
 }
 
 function createComponent(fileName, params = {}, settings = {}) {
-  let dir = 'components';
-  let { componentType } = settings;
+  let { componentType, componentsDirectory } = settings;
+  let dir = componentsDirectory || 'components';
   let isClass = params.class || componentType === 'class';
 
   _createFile(dir, fileName, isClass);
 }
 
 function createRoute(fileName, params = {}, settings = {}) {
-  let dir = 'routes';
-  let { componentType } = settings;
+  let { componentType, routesDirectory } = settings;
+
+  let dir = routesDirectory || 'routes';
 
   let isClass = params.class || componentType === 'class';
 
   _createFile(dir, fileName, isClass);
 
-  addToRouter(fileName);
+  addToRouter(fileName, dir);
 }
 
 function _createFile(dir, fileName, isClassComponent) {
