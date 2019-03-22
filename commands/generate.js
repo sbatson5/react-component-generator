@@ -2,29 +2,29 @@ const fs = require('fs-extra');
 const DEFAULT_FOLDER = './src';
 const insertIntoFile = require('../insert-into-file');
 
-module.exports = (fileType, fileName) => {
+module.exports = (fileType, fileName, params) => {
   if (!fileName) return;
 
   switch (fileType) {
     case 'component':
-      createComponent(fileName);
+      createComponent(fileName, params);
       break;
     case 'route':
-      createRoute(fileName);
+      createRoute(fileName, params);
       break;
     default:
       break;
   }
 }
 
-function createComponent(fileName) {
+function createComponent(fileName, params = {}) {
   let dir = 'components';
-  _createFile(dir, fileName);
+  _createFile(dir, fileName, params.class);
 }
 
-function createRoute(fileName) {
+function createRoute(fileName, params) {
   let dir = 'routes';
-  _createFile(dir, fileName);
+  _createFile(dir, fileName, params.class);
 
   _addToRouter(fileName);
 }
@@ -44,7 +44,7 @@ async function _addToRouter(fileName) {
   }, updatedFile);
 }
 
-function _createFile(dir, fileName) {
+function _createFile(dir, fileName, isClassComponent) {
   let directories = [DEFAULT_FOLDER, dir, ...fileName.split('/')];
   directories.pop();
   _createDirectoryIfItDoesntExist(directories.join('/'));
@@ -56,7 +56,7 @@ function _createFile(dir, fileName) {
     return;
   }
 
-  fs.writeFile(fullPath, getFileContent(fileName), function (err) {
+  fs.writeFile(fullPath, getFileContent(fileName, isClassComponent), function (err) {
     if (err) throw err;
     console.log(`generated ${dir}/${fileName}.js`);
   });
@@ -68,7 +68,30 @@ function _createDirectoryIfItDoesntExist(dir) {
   }
 }
 
-function getFileContent(fileName) {
+function getFileContent(fileName, isClassComponent) {
+  if (isClassComponent) {
+    return classComponent(fileName);
+  } else {
+    return functionComponent(fileName);
+  }
+}
+
+function classComponent(fileName) {
+  let [start, end] = fileName.split('-');
+  let className = `${upcase(start)}${upcase(end)}`;
+  return `import React, { Component } from 'react';
+
+class ${className} extends Component {
+  render() {
+    return (
+      <div>
+      </div>
+    );
+  }
+}`
+}
+
+function functionComponent(fileName) {
   let [start, end] = fileName.split('-');
   let functionName = `${start}${upcase(end)}`;
   return `import React from 'react';

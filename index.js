@@ -28,7 +28,7 @@ module.exports = () => {
       require('./commands/generate')(file, fileName, params);
       break;
     case 'delete':
-      require('./commands/delete')(file, fileName, params);
+      require('./commands/delete')(file, fileName);
       break;
     default:
       console.error(`"${cmd}" is not a valid command!`)
