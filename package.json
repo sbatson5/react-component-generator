@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "bin": {
-    "react-generator": "bin/react-generator"
+    "rcg": "bin/react-generator"
   },
   "scripts": {},
   "devDependencies": {},
