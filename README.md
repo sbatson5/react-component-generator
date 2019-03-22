@@ -115,9 +115,27 @@ rcg destroy component my-component
 This will remove any javascript file by that name in the `components` directory.
 This command can be aliased to `del`, `d`, or `destroy`.
 
+## But I Want Different Defaults
+
+In your project, create a `.react-component-generator` file.
+This is a text file that follows a JSON format and is read at runtime to find
+project-specific defaults.
+
+Currently the settings you specify:
+
+`componentType` - this can be `class` or `function`
+  * `class` will generate class-based components by default (without
+    requiring the `--class flag`)
+  * `function` is the default and does not need to be specified
+
+```json
+{
+  "componentType": "class"
+}
+
+```
+
 ## Coming soon:
-You will be able to specify a default component strategy per repo (i.e. always
-generating a class component).
 Specify where the Router exists -- the assumption now is that it lives in
 `src/App.js` but that may not be the case for ever project.
 Specify the wrapping element that holds the routes -- the assumption is that

@@ -1,47 +1,39 @@
 const fs = require('fs-extra');
 const DEFAULT_FOLDER = './src';
-const insertIntoFile = require('../insert-into-file');
+const addToRouter = require('./add-to-router');
 
-module.exports = (fileType, fileName, params) => {
+module.exports = (fileType, fileName, params, settings) => {
   if (!fileName) return;
 
   switch (fileType) {
     case 'component':
-      createComponent(fileName, params);
+      createComponent(fileName, params, settings);
       break;
     case 'route':
-      createRoute(fileName, params);
+      createRoute(fileName, params, settings);
       break;
     default:
       break;
   }
 }
 
-function createComponent(fileName, params = {}) {
+function createComponent(fileName, params = {}, settings = {}) {
   let dir = 'components';
-  _createFile(dir, fileName, params.class);
+  let { componentType } = settings;
+  let isClass = params.class || componentType === 'class';
+
+  _createFile(dir, fileName, isClass);
 }
 
-function createRoute(fileName, params) {
+function createRoute(fileName, params = {}, settings = {}) {
   let dir = 'routes';
-  _createFile(dir, fileName, params.class);
+  let { componentType } = settings;
 
-  _addToRouter(fileName);
-}
+  let isClass = params.class || componentType === 'class';
 
-async function _addToRouter(fileName) {
-  let [start, end] = fileName.split('-');
-  let routeName = `${upcase(start)}${upcase(end)}`;
-  let importStatement = `import ${routeName} from './routes/${fileName}';`;
-  let routeStatement = `<Route path="/${fileName}" exact component={${routeName}} />`
+  _createFile(dir, fileName, isClass);
 
-  let updatedFile = await insertIntoFile(`${DEFAULT_FOLDER}/App.js`, importStatement, {
-    after: /(import.+?;)/
-  });
-
-  await insertIntoFile(`${DEFAULT_FOLDER}/App.js`, routeStatement, {
-    after: /(<div className="App.+?">)/
-  }, updatedFile);
+  addToRouter(fileName);
 }
 
 function _createFile(dir, fileName, isClassComponent) {
