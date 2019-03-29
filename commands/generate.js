@@ -81,7 +81,9 @@ class ${className} extends Component {
       </div>
     );
   }
-}`
+}
+
+export default ${className};`
 }
 
 function functionComponent(fileName) {
