@@ -10,7 +10,7 @@ the appropriate directory and updates our router.
 To get started.
 
 ```bash
-npm install -g react-component-generator
+npm install -g rcg-cli
 ```
 
 To add a component, simply use the generate command:
@@ -78,7 +78,7 @@ export default App;
 
 ## Specifying class components
 
-By default, `react-component-generator` adds function components, as that seems
+By default, `rcg-cli` adds function components, as that seems
 to be the recommended pattern going forward.
 However, it can generate class components by using the `--class` flag.
 
