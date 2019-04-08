@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 module.exports = () => {
   const args = minimist(process.argv.slice(2));
   const params = Object.assign({}, args);
-  delete params._;
+  delete params._;  // ok
 
   const cmd = args._[0];
   const file = args._[1];
